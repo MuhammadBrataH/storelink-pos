@@ -15,11 +15,7 @@
         <h1 class="text-2xl font-semibold text-slate-900">Login</h1>
         <p class="text-slate-500 text-sm mt-1">Masuk sebagai Admin atau Kasir</p>
 
-        @if ($errors->any())
-        <div class="mt-4 rounded-md bg-red-50 text-red-700 text-sm p-3">
-            {{ $errors->first() }}
-        </div>
-        @endif
+
 
         <form method="POST" action="{{ route('login.submit') }}" class="mt-6 space-y-4">
             @csrf
@@ -42,6 +38,12 @@
                     required
                     class="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900" />
             </div>
+
+            @if ($errors->any())
+            <p class="mt-4 rounded-md bg-red-50 text-red-700 text-sm p-3">
+                {{ $errors->first() }}
+            </p>
+            @endif
 
             <button
                 type="submit"
