@@ -46,35 +46,13 @@
                     value="{{ $search ?? '' }}" />
             </form>
         @endif
-        <!-- Right Nav Profile/Icons -->
+        <!-- Right Nav Profile -->
         <div class="flex items-center space-x-5">
-            <!-- Notifications -->
-            <button class="text-gray-400 hover:text-gray-500 relative">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                </svg>
-                <span
-                    class="absolute top-0 right-0 block h-4 w-4 rounded-full bg-red-500 text-white text-[10px] font-bold flex items-center justify-center transform translate-x-1 -translate-y-1">3</span>
-            </button>
-            <!-- Settings Header Icon -->
-            <button class="text-gray-400 hover:text-gray-500">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                    <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"
-                        stroke-width="2"></path>
-                </svg>
-            </button>
             <!-- Profile -->
             <div class="flex items-center space-x-3 border-l pl-5 border-gray-200">
                 <img alt="User Avatar" class="h-8 w-8 rounded-full object-cover border border-gray-200 bg-gray-100"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuASaThGtpL0MUG5_G9b0uQ7z1jZRbonGeqvGgJzvhy0QaBok3zCv33d36FEEzkB81Ep0QmHxoyHHuhu0AORseDF7_-5SPJ2UTll04FX1oIa2cNBfLWkZ0-tXUqdGJ_oqFNmrL11bagKrnCT79FGwijKzOu7jzdJ4OVwXupsw330JOnvY32-PWD5UuyAzvvolmIrT-XCTDGbctGpSAme-wxRiZAvTduj3gwL1g4UrtJrjIJ7Bg-vqlZbD_Nmsr5GxAv8sAy8J1Xt-G0" />
-                <span class="text-sm font-medium text-gray-700">Halo, Pak Budi!</span>
+                <span class="text-sm font-medium text-gray-700">Halo, {{ auth()->user()->name ?: auth()->user()->username }}!</span>
             </div>
         </div>
     </header>
