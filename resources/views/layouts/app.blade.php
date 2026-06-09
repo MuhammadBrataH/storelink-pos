@@ -106,8 +106,10 @@
                 </a>
                 <!-- Inventory (Active) arahkan ke -->
                 <div class="relative flex justify-center items-center w-full py-3">
-                    <div class="absolute left-0 top-0 bottom-0 w-1 bg-blue-600 rounded-r-md"></div>
-                    <a class="bg-blue-50 text-blue-600 p-2 rounded-lg flex justify-center items-center relative group"
+                    @if (request()->routeIs('inventory.*'))
+                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-blue-600 rounded-r-md"></div>
+                    @endif
+                    <a class="{{ request()->routeIs('inventory.*') ? 'bg-blue-50 text-blue-600' : 'text-gray-400 hover:text-gray-600' }} p-2 rounded-lg flex justify-center items-center relative group w-full"
                         href="{{ route('inventory.index') }}">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -134,17 +136,24 @@
                             stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
                     </svg>
                 </a>
-                <!-- Settings -->
-                <a class="flex justify-center items-center w-full py-3 text-gray-400 hover:text-gray-600 transition-colors"
-                    href="#">
+                <!-- Users -->
+                <a class="flex justify-center items-center w-full py-3 text-gray-400 hover:text-gray-600 transition-colors group relative {{ request()->routeIs('users.*') ? 'bg-blue-50 text-blue-600 rounded-lg' : '' }}"
+                    href="{{ route('users.index') }}">
+                    @if (request()->routeIs('users.*'))
+                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-blue-600 rounded-r-md"></div>
+                    @endif
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"
-                            stroke-width="2"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                     </svg>
+                    <!-- Tooltip -->
+                    <div
+                        class="absolute left-full ml-4 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity pointer-events-none">
+                        Manajemen User
+                        <div
+                            class="absolute right-full top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-4 border-t-transparent border-r-4 border-r-gray-700 border-b-4 border-b-transparent">
+                        </div>
+                    </div>
                 </a>
             </nav>
         </aside>

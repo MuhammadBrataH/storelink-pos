@@ -34,6 +34,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::put('/{product}', [ProductController::class, 'update'])->name('update');
         Route::delete('/{product}', [ProductController::class, 'destroy'])->name('destroy');
     });
+
+    Route::resource('users', App\Http\Controllers\UserController::class)->except(['show']);
 });
 
 Route::middleware(['auth', 'role:kasir'])->group(function () {
