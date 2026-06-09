@@ -15,7 +15,7 @@ REVISI_PRD Storelink POS & Inventory (Toko Fashion).pdf
 /.zed
 /auth.json
 /node_modules
-/public/build
+# /public/build
 /public/hot
 /public/storage
 /storage/*.key

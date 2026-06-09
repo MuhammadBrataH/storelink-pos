@@ -1,0 +1,8 @@
+/vendor
+/node_modules
+/tests
+/storage/framework/cache/data/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+.env
+phpunit.xml

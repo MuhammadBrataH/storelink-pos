@@ -5,9 +5,29 @@
         {
             "src": "api/index.php",
             "use": "vercel-php@0.6.0"
+        },
+        {
+            "src": "public/**",
+            "use": "@vercel/static"
         }
     ],
     "routes": [
+        {
+            "src": "/build/(.*)",
+            "dest": "/public/build/$1"
+        },
+        {
+            "src": "/images/(.*)",
+            "dest": "/public/images/$1"
+        },
+        {
+            "src": "/storage/(.*)",
+            "dest": "/public/storage/$1"
+        },
+        {
+            "src": "/favicon.ico",
+            "dest": "/public/favicon.ico"
+        },
         {
             "src": "/(.*)",
             "dest": "/api/index.php"
@@ -16,10 +36,7 @@
     "env": {
         "APP_ENV": "production",
         "APP_DEBUG": "false",
-        "DB_CONNECTION": "mysql",
-        "DB_HOST": "storelink-db-storelink-pos.l.aivencloud.com",
-        "DB_PORT": "21830",
-        "DB_DATABASE": "defaultdb",
-        "DB_USERNAME": "avnadmin"
+        "LOG_CHANNEL": "stderr",
+        "APP_URL": "https://storelink.vercel.app"
     }
 }
