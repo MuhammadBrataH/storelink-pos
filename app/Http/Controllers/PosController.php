@@ -13,7 +13,7 @@ class PosController extends Controller
 {
     public function index()
     {
-        $products = ProductVariation::with('product')->get();
+        $products = \App\Models\Product::with('variations')->get();
         return view('pos.index', compact('products'));
     }
 

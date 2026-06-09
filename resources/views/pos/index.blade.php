@@ -167,15 +167,14 @@
             <template x-for="product in filteredProducts" :key="product.id">
               <article class="bg-surface-container-lowest rounded-xl p-2 flex flex-col gap-2 ambient-shadow-1 border border-surface-variant h-fit">
                 <div class="aspect-square rounded-lg overflow-hidden bg-surface-container-highest">
-                  <!-- Use placeholder image if no image available (or product.image in future) -->
-                  <img :alt="product.name" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYP8ONHAevgXtNFNNsp7yMO_PzqwRukdQi4TTEl7rA-NYCwhF8w9XJjw6TeJc-gj1ONvPAwycyhXo70hxLgFkEK1a-d7wZqeX0BKIlkJyOguaNVFSkPcr30Zgi751sAfqOoiVG2-Xs1f26YWoru7JyBJ8qTr8UOCYfHDsVGe26r2n8kOALOkTzTEhTLB786O0oIyZPDLg5XprD_B1vke4efe4IZryaW_Mhll4wL52a55Fj8So9YAVb_bblXm8ib3lleO2FvH6HWJc" />
+                  <img :alt="product.name" class="w-full h-full object-cover" :src="product.image_url" />
                 </div>
                 <div class="flex flex-col flex-1">
                   <h3 class="text-label-md font-label-md font-bold text-on-surface line-clamp-1 mb-1" x-text="product.name"></h3>
-                  <p class="text-[11px] font-semibold text-on-surface mt-auto" x-text="formatRupiah(product.price)"></p>
-                  <p class="text-[10px] text-on-surface-variant">Stok: <span x-text="product.stock"></span></p>
+                  <p class="text-[11px] font-semibold text-on-surface mt-auto" x-text="product.variations.length > 0 ? formatRupiah(product.variations[0].price) : 'Rp0'"></p>
+                  <p class="text-[10px] text-on-surface-variant">Total Stok: <span x-text="product.variations.reduce((sum, v) => sum + v.stock, 0)"></span></p>
                 </div>
-                <button @click="addToCart(product)" class="w-full py-1.5 bg-surface border border-primary-container text-primary-container hover:bg-surface-container-high rounded-lg text-label-md font-label-md flex items-center justify-center gap-1 transition-colors mt-1">
+                <button @click="openVariationModal(product)" class="w-full py-1.5 bg-surface border border-primary-container text-primary-container hover:bg-surface-container-high rounded-lg text-label-md font-label-md flex items-center justify-center gap-1 transition-colors mt-1">
                   <span class="material-symbols-outlined text-[16px]">add</span>
                   Tambah
                 </button>
@@ -250,6 +249,37 @@
         </div>
       </aside>
     </main>
+
+    <!-- Modal: Pilih Varian -->
+    <div x-show="showVariationModal" class="fixed inset-0 bg-on-surface/30 backdrop-blur-sm z-40 flex items-center justify-center p-4" style="display: none;">
+      <div class="bg-surface-container-lowest w-full max-w-md rounded-xl ambient-shadow-3 flex flex-col relative overflow-hidden p-6" @click.away="showVariationModal = false">
+        <!-- Close Button -->
+        <button @click="showVariationModal = false" class="absolute top-4 right-4 text-on-surface-variant hover:text-on-surface transition-colors p-1 rounded-full hover:bg-surface-container-high">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+
+        <h2 class="text-headline-sm font-bold text-on-surface mb-2 border-b border-outline-variant pb-3" x-text="'Pilih Varian: ' + (selectedProductForVariation ? selectedProductForVariation.name : '')"></h2>
+        
+        <div class="flex flex-col gap-3 max-h-[60vh] overflow-y-auto mt-2 hide-scroll">
+            <template x-for="variation in (selectedProductForVariation ? selectedProductForVariation.variations : [])" :key="variation.id">
+                <div class="flex items-center justify-between p-3 border rounded-lg transition-colors cursor-pointer" 
+                     :class="variation.stock > 0 ? 'border-outline-variant hover:bg-surface-container-high' : 'border-outline-variant/50 bg-surface-container opacity-50 cursor-not-allowed'"
+                     @click="if(variation.stock > 0) addVariationToCart(variation)">
+                    <div class="flex flex-col">
+                        <span class="text-label-md font-bold text-on-surface" x-text="(variation.size ? variation.size : '') + (variation.color ? ' - ' + variation.color : '') + (!variation.size && !variation.color ? 'Default' : '')"></span>
+                        <span class="text-body-sm text-on-surface-variant" x-text="formatRupiah(variation.price)"></span>
+                    </div>
+                    <div class="flex flex-col items-end">
+                        <span class="text-xs mb-1" :class="variation.stock > 0 ? 'text-primary' : 'text-error'" x-text="variation.stock > 0 ? 'Stok: ' + variation.stock : 'Habis'"></span>
+                        <button class="px-3 py-1 rounded text-xs font-bold transition-colors"
+                                :class="variation.stock > 0 ? 'bg-primary-container text-on-primary-container' : 'bg-surface-variant text-on-surface-variant'"
+                                :disabled="variation.stock <= 0">Tambah</button>
+                    </div>
+                </div>
+            </template>
+        </div>
+      </div>
+    </div>
 
     <!-- Modal: Simulasi Pembayaran -->
     <div x-show="showPaymentModal" class="fixed inset-0 bg-on-surface/30 backdrop-blur-sm z-40 flex items-center justify-center p-4" style="display: none;">
@@ -409,14 +439,22 @@
     <script>
         document.addEventListener('alpine:init', () => {
             Alpine.data('posSystem', () => ({
-                products: {!! json_encode($products->map(function($v) {
+                products: {!! json_encode($products->map(function($p) {
                     return [
-                        'id' => $v->id, 
-                        'name' => $v->product->name . ' - ' . $v->size, 
-                        'price' => $v->price_sell, 
-                        'stock' => $v->stock,
-                        'barcode' => $v->barcode,
-                        'category' => $v->product->category ?? 'Semua'
+                        'id' => $p->id, 
+                        'name' => $p->name, 
+                        'category' => $p->category ?? 'Semua',
+                        'image_url' => $p->image_url ? asset('storage/' . $p->image_url) : 'https://lh3.googleusercontent.com/aida-public/AB6AXuAYP8ONHAevgXtNFNNsp7yMO_PzqwRukdQi4TTEl7rA-NYCwhF8w9XJjw6TeJc-gj1ONvPAwycyhXo70hxLgFkEK1a-d7wZqeX0BKIlkJyOguaNVFSkPcr30Zgi751sAfqOoiVG2-Xs1f26YWoru7JyBJ8qTr8UOCYfHDsVGe26r2n8kOALOkTzTEhTLB786O0oIyZPDLg5XprD_B1vke4efe4IZryaW_Mhll4wL52a55Fj8So9YAVb_bblXm8ib3lleO2FvH6HWJc',
+                        'variations' => $p->variations->map(function($v) {
+                            return [
+                                'id' => $v->id,
+                                'size' => $v->size,
+                                'color' => $v->color,
+                                'price' => $v->price_sell,
+                                'stock' => $v->stock,
+                                'barcode' => $v->barcode
+                            ];
+                        })->values()
                     ];
                 })) !!},
                 cart: [],
@@ -425,6 +463,10 @@
                 discount: 0,
                 paymentMethod: '',
                 
+                // Variation Modal State
+                showVariationModal: false,
+                selectedProductForVariation: null,
+
                 // Payment Simulation State
                 showPaymentModal: false,
                 cashReceived: 0,
@@ -477,21 +519,48 @@
                     this.showPaymentModal = true;
                 },
 
-                addToCart(product) {
-                    let existing = this.cart.find(item => item.id === product.id);
+                openVariationModal(product) {
+                    if (product.variations.length === 0) {
+                        alert('Produk ini belum memiliki varian!');
+                        return;
+                    }
+                    if (product.variations.length === 1) {
+                        this.selectedProductForVariation = product;
+                        this.addVariationToCart(product.variations[0]);
+                    } else {
+                        this.selectedProductForVariation = product;
+                        this.showVariationModal = true;
+                    }
+                },
+
+                addVariationToCart(variation) {
+                    let productName = this.selectedProductForVariation.name;
+                    let variationName = (variation.size ? variation.size : '') + (variation.color ? ' - ' + variation.color : '');
+                    if (!variationName) variationName = 'Default';
+                    
+                    let fullName = productName + ' (' + variationName + ')';
+
+                    let existing = this.cart.find(item => item.id === variation.id);
                     if (existing) {
-                        if(existing.qty < product.stock) {
+                        if(existing.qty < variation.stock) {
                             existing.qty++;
                         } else {
-                            alert('Stok maksimal tercapai untuk produk ini!');
+                            alert('Stok maksimal tercapai untuk varian ini!');
                         }
                     } else {
-                        if (product.stock > 0) {
-                            this.cart.push({ ...product, qty: 1 });
+                        if (variation.stock > 0) {
+                            this.cart.push({ 
+                                id: variation.id,
+                                name: fullName,
+                                price: variation.price,
+                                stock: variation.stock,
+                                qty: 1 
+                            });
                         } else {
                             alert('Stok habis!');
                         }
                     }
+                    this.showVariationModal = false;
                 },
 
                 increaseQty(index) {
