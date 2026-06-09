@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="p-4 sm:p-6 lg:p-margin-desktop">
 <!-- Header -->
 <header class="mb-gutter">
 <h1 class="text-headline-lg font-headline-lg text-on-surface">Ringkasan Statistik &amp; Analitik: Butik Pak Budi</h1>
@@ -274,4 +275,5 @@
         });
     </script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</div>
 @endsection

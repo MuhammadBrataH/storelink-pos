@@ -247,7 +247,7 @@
         </aside>
         <!-- END: Sidebar -->
 
-        <main class="flex-1 overflow-y-auto">
+        <main class="flex-1 overflow-y-auto bg-surface">
             @yield('content')
         </main>
     </div>
