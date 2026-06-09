@@ -182,16 +182,25 @@
             </div>
             <!-- Navigation Icons -->
             <nav class="flex flex-col space-y-4 w-full">
-                <!-- Home -->
-                <a class="flex justify-center items-center w-full py-3 text-gray-400 hover:text-gray-600 transition-colors"
-                    href="#">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                    </svg>
-                </a>
+                <div class="relative flex justify-center items-center w-full py-3">
+                    @if (request()->routeIs('home'))
+                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-blue-600 rounded-r-md"></div>
+                    @endif
+                    <a class="{{ request()->routeIs('home') ? 'bg-blue-50 text-blue-600' : 'text-gray-400 hover:text-gray-600' }} p-2 rounded-lg flex justify-center items-center relative group w-full transition-colors"
+                        href="{{ route('home') }}">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                        </svg>
+                        <!-- Tooltip -->
+                        <div class="absolute left-full ml-4 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity pointer-events-none">
+                            Dashboard
+                            <div class="absolute right-full top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-4 border-t-transparent border-r-4 border-r-gray-700 border-b-4 border-b-transparent"></div>
+                        </div>
+                    </a>
+                </div>
                 <!-- Inventory (Active) arahkan ke -->
                 <div class="relative flex justify-center items-center w-full py-3">
                     @if (request()->routeIs('inventory.*'))

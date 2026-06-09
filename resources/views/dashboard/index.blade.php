@@ -174,10 +174,10 @@
 <p class="text-body-sm text-on-surface-variant text-center py-4">Semua stok aman.</p>
 @endforelse
 </div>
-<button class="w-full py-2 px-4 bg-primary-container text-on-primary text-label-lg font-label-lg rounded-lg hover:bg-primary transition-colors flex items-center justify-center gap-2">
+<a href="{{ route('inventory.index') }}" class="w-full py-2 px-4 bg-primary-container text-on-primary text-label-lg font-label-lg rounded-lg hover:bg-primary transition-colors flex items-center justify-center gap-2">
 <span class="material-symbols-outlined" data-icon="inventory" data-weight="fill">inventory</span>
                  Lihat Inventaris
-             </button>
+             </a>
 </div>
 </div>
 <!-- Chart Scripts -->
