@@ -134,6 +134,27 @@
     </style>
 </head>
 <body class="bg-background text-on-background font-body-md h-screen overflow-hidden flex flex-col" x-data="posSystem()">
+    <!-- Header -->
+    <header class="bg-surface-container-lowest border-b border-outline-variant h-16 flex items-center justify-between px-6 shrink-0 no-print ambient-shadow-1 z-10">
+        <div class="flex items-center space-x-2 font-bold text-lg tracking-wide text-primary">
+            <span class="material-symbols-outlined text-[28px]">storefront</span>
+            <span>STORELINK POS</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="flex items-center space-x-3 border-r pr-5 border-outline-variant">
+                <img alt="User Avatar" class="h-8 w-8 rounded-full object-cover border border-outline-variant bg-surface"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuASaThGtpL0MUG5_G9b0uQ7z1jZRbonGeqvGgJzvhy0QaBok3zCv33d36FEEzkB81Ep0QmHxoyHHuhu0AORseDF7_-5SPJ2UTll04FX1oIa2cNBfLWkZ0-tXUqdGJ_oqFNmrL11bagKrnCT79FGwijKzOu7jzdJ4OVwXupsw330JOnvY32-PWD5UuyAzvvolmIrT-XCTDGbctGpSAme-wxRiZAvTduj3gwL1g4UrtJrjIJ7Bg-vqlZbD_Nmsr5GxAv8sAy8J1Xt-G0" />
+                <span class="text-sm font-medium text-on-surface">Kasir: {{ auth()->user()->name ?: auth()->user()->username }}</span>
+            </div>
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="flex items-center gap-1 text-error hover:text-error/80 transition-colors text-sm font-bold">
+                    <span class="material-symbols-outlined text-[20px]">logout</span>
+                    Keluar
+                </button>
+            </form>
+        </div>
+    </header>
 
     <!-- Main Content Area -->
     <main class="flex-1 flex overflow-hidden pl-margin-mobile md:pl-margin-desktop pr-margin-mobile md:pr-margin-desktop pt-margin-mobile pb-margin-mobile gap-gutter">
