@@ -26,7 +26,7 @@ class LoginController extends Controller
             $user = $request->user();
 
             return $user->role === 'admin'
-                ? redirect()->route('admin.home')
+                ? redirect()->route('home')
                 : redirect()->route('pos.index');
         }
 
