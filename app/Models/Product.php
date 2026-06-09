@@ -21,7 +21,6 @@ class Product extends Model
     {
         return $this->hasMany(ProductVariation::class);
     }
-
     public function getStockStatusAttribute()
     {
         $totalStock = $this->variations->sum('stock');

@@ -15,8 +15,6 @@
         <h1 class="text-2xl font-semibold text-slate-900">Login</h1>
         <p class="text-slate-500 text-sm mt-1">Masuk sebagai Admin atau Kasir</p>
 
-
-
         <form method="POST" action="{{ route('login.submit') }}" class="mt-6 space-y-4">
             @csrf
             <div>
@@ -44,7 +42,6 @@
                 {{ $errors->first() }}
             </p>
             @endif
-
             <button
                 type="submit"
                 class="w-full rounded-md bg-slate-900 text-white py-2 text-sm font-medium hover:bg-slate-800">
