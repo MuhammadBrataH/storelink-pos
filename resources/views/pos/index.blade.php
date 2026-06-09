@@ -168,7 +168,7 @@
         <div class="mb-4 flex flex-col sm:flex-row gap-4 items-start sm:items-center shrink-0">
           <div class="relative w-full sm:w-64">
             <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
-            <input x-model="searchQuery" class="w-full pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-colors text-body-sm font-body-sm text-on-surface" placeholder="Cari Produk atau Barcode..." type="text" />
+            <input x-model="searchQuery" class="w-full pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-colors text-body-sm font-body-sm text-on-surface" placeholder="Cari Produk..." type="text" />
           </div>
           <div class="flex gap-2 overflow-x-auto hide-scroll pb-1 w-full sm:w-auto">
             <button @click="selectedCategory = 'Semua'" :class="selectedCategory === 'Semua' ? 'bg-surface-container-lowest border-2 border-primary-container text-on-surface ambient-shadow-1' : 'bg-surface border border-outline-variant text-on-surface-variant hover:bg-surface-container-high'" class="px-4 py-1.5 rounded-full text-label-md font-label-md whitespace-nowrap transition-colors">
