@@ -73,7 +73,7 @@
                                         <div
                                             class="w-10 h-10 bg-gray-100 rounded-md border flex items-center justify-center overflow-hidden">
                                             <img alt="{{ $product->name }}" class="w-8 h-8 object-cover rounded mix-blend-multiply"
-                                                src="{{ $product->image_url ? asset('storage/' . $product->image_url) : 'https://placehold.co/400x400?text=%3F' }}" />
+                                                src="{{ $product->image_url ? asset('storage/' . $product->image_url) : 'https://ui-avatars.com/api/?name='.urlencode($product->name).'&color=7F9CF5&background=EBF4FF' }}" />
                                         </div>
                                         <span class="font-medium text-gray-800 truncate max-w-[200px]"
                                             title="{{ $product->name }}">{{ $product->name }}</span>

@@ -464,7 +464,7 @@
                         'id' => $p->id, 
                         'name' => $p->name, 
                         'category' => $p->category ?? 'Semua',
-                        'image_url' => $p->image_url ? asset('storage/' . $p->image_url) : 'https://lh3.googleusercontent.com/aida-public/AB6AXuAYP8ONHAevgXtNFNNsp7yMO_PzqwRukdQi4TTEl7rA-NYCwhF8w9XJjw6TeJc-gj1ONvPAwycyhXo70hxLgFkEK1a-d7wZqeX0BKIlkJyOguaNVFSkPcr30Zgi751sAfqOoiVG2-Xs1f26YWoru7JyBJ8qTr8UOCYfHDsVGe26r2n8kOALOkTzTEhTLB786O0oIyZPDLg5XprD_B1vke4efe4IZryaW_Mhll4wL52a55Fj8So9YAVb_bblXm8ib3lleO2FvH6HWJc',
+                        'image_url' => $p->image_url ? asset('storage/' . $p->image_url) : 'https://ui-avatars.com/api/?name='.urlencode($p->name).'&color=7F9CF5&background=EBF4FF',
                         'variations' => $p->variations->map(function($v) {
                             return [
                                 'id' => $v->id,
