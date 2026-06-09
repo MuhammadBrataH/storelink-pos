@@ -87,19 +87,21 @@ class ProductController extends Controller
             'variations.*.stock' => ['required', 'integer', 'min:0'],
         ]);
 
-        // Upload gambar ke Cloudinary jika user mengirim file.
+        // Upload gambar (menggunakan local storage di local, Cloudinary di production)
         $imageUrl = null;
         if ($request->hasFile('image')) {
-            // uploadApi()->upload() otomatis upload file fisik ke Cloudinary.
-            // secure_url otomatis memberi URL HTTPS dari hasil upload.
-            $uploaded = Cloudinary::uploadApi()->upload(
-                $request->file('image')->getRealPath(),
-                ['folder' => 'storelink_products']
-            );
-            $imageUrl = $uploaded['secure_url'] ?? null;
+            if (app()->environment('production') && class_exists('\CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary')) {
+                $uploaded = Cloudinary::uploadApi()->upload(
+                    $request->file('image')->getRealPath(),
+                    ['folder' => 'storelink_products']
+                );
+                $imageUrl = $uploaded['secure_url'] ?? null;
 
-            if (! $imageUrl) {
-                throw new RuntimeException('Gagal mendapatkan URL gambar dari Cloudinary.');
+                if (! $imageUrl) {
+                    throw new RuntimeException('Gagal mendapatkan URL gambar dari Cloudinary.');
+                }
+            } else {
+                $imageUrl = $request->file('image')->store('products', 'public');
             }
         }
 
@@ -155,16 +157,18 @@ class ProductController extends Controller
         // Upload gambar baru jika ada, jika tidak pakai gambar lama.
         $imageUrl = $product->image_url;
         if ($request->hasFile('image')) {
-            // uploadApi()->upload() otomatis upload file fisik ke Cloudinary.
-            // secure_url otomatis memberi URL HTTPS dari hasil upload.
-            $uploaded = Cloudinary::uploadApi()->upload(
-                $request->file('image')->getRealPath(),
-                ['folder' => 'storelink_products']
-            );
-            $imageUrl = $uploaded['secure_url'] ?? null;
+            if (app()->environment('production') && class_exists('\CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary')) {
+                $uploaded = Cloudinary::uploadApi()->upload(
+                    $request->file('image')->getRealPath(),
+                    ['folder' => 'storelink_products']
+                );
+                $imageUrl = $uploaded['secure_url'] ?? null;
 
-            if (! $imageUrl) {
-                throw new RuntimeException('Gagal mendapatkan URL gambar dari Cloudinary.');
+                if (! $imageUrl) {
+                    throw new RuntimeException('Gagal mendapatkan URL gambar dari Cloudinary.');
+                }
+            } else {
+                $imageUrl = $request->file('image')->store('products', 'public');
             }
         }
 
