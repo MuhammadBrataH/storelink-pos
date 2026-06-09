@@ -137,8 +137,11 @@
     <!-- Header -->
     <header class="bg-surface-container-lowest border-b border-outline-variant h-16 flex items-center justify-between px-6 shrink-0 no-print ambient-shadow-1 z-10">
         <div class="flex items-center space-x-2 font-bold text-lg tracking-wide text-primary">
-            <span class="material-symbols-outlined text-[28px]">storefront</span>
-            <span>STORELINK POS</span>
+            <!-- Logo SVG -->
+            <svg class="w-6 h-6 text-[#2563eb]" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+            </svg>
+            <span>STORELINK</span>
         </div>
         <div class="flex items-center gap-4">
             <div class="flex items-center space-x-3 border-r pr-5 border-outline-variant">
@@ -396,8 +399,10 @@
           <h2 class="text-headline-sm font-headline-sm text-on-surface mb-1">
             Struk Belanja Digital
           </h2>
-          <div class="flex items-center gap-2 text-primary-container font-headline-md font-bold mb-4">
-            <span class="material-symbols-outlined text-[28px]">storefront</span>
+          <div class="flex items-center gap-2 text-[#2563eb] font-headline-md font-bold mb-4">
+            <svg class="w-6 h-6" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+            </svg>
             STORELINK
           </div>
           <div class="w-full text-mono-label font-mono-label text-on-surface-variant text-left space-y-1">
