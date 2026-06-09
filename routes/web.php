@@ -43,6 +43,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
         Route::resource('/inventory', \App\Http\Controllers\Admin\ProductController::class);
     });
+
+    Route::resource('users', App\Http\Controllers\UserController::class)->except(['show']);
 });
 
 // Kasir Routes (POS)
