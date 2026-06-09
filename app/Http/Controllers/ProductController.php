@@ -45,10 +45,10 @@ class ProductController extends Controller
         // Ambil produk beserta variasi dan total stoknya untuk tabel.
         $products = (clone $productQuery)->paginate(5)->withQueryString();
 
-        // Hitung jumlah produk dengan stok rendah (ada varian yang stoknya > 0 tapi <= 5).
-        $lowStockProducts = $summaryProducts->filter(function ($product) {
-            return $product->variations->contains(fn ($v) => $v->stock > 0 && $v->stock <= 5);
-        })->count();
+        // Hitung jumlah variasi dengan stok rendah (stok > 0 tapi <= 5).
+        $lowStockProducts = $summaryProducts->flatMap->variations
+            ->filter(fn ($v) => $v->stock > 0 && $v->stock <= 5)
+            ->count();
 
         // Hitung jumlah produk yang stoknya habis (ada varian yang stoknya == 0).
         $outOfStockProducts = $summaryProducts->filter(function ($product) {
@@ -90,7 +90,7 @@ class ProductController extends Controller
         // Upload gambar (menggunakan local storage di local, Cloudinary di production)
         $imageUrl = null;
         if ($request->hasFile('image')) {
-            if (app()->environment('production') && class_exists('\CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary')) {
+            if (env('CLOUDINARY_URL') && class_exists('\CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary')) {
                 $uploaded = Cloudinary::uploadApi()->upload(
                     $request->file('image')->getRealPath(),
                     ['folder' => 'storelink_products']
@@ -157,7 +157,7 @@ class ProductController extends Controller
         // Upload gambar baru jika ada, jika tidak pakai gambar lama.
         $imageUrl = $product->image_url;
         if ($request->hasFile('image')) {
-            if (app()->environment('production') && class_exists('\CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary')) {
+            if (env('CLOUDINARY_URL') && class_exists('\CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary')) {
                 $uploaded = Cloudinary::uploadApi()->upload(
                     $request->file('image')->getRealPath(),
                     ['folder' => 'storelink_products']

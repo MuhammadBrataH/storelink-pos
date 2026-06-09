@@ -71,7 +71,7 @@
                     <!-- END: PrimaryInfo -->
                     <!-- Column 2: Upload Foto Produk -->
                     <!-- BEGIN: PhotoUpload -->
-                    <div class="space-y-4 lg:col-span-2" x-data="{ imageUrl: '{{ $product->image_url ?: 'https://via.placeholder.com/240x240' }}', fileChosen(event) { const file = event.target.files[0]; if (file) { const reader = new FileReader(); reader.onload = (e) => this.imageUrl = e.target.result; reader.readAsDataURL(file); } } }">
+                    <div class="space-y-4 lg:col-span-2" x-data="{ imageUrl: '{{ $product->image_url ? (str_starts_with($product->image_url, 'http') ? $product->image_url : asset('storage/' . $product->image_url)) : 'https://via.placeholder.com/240x240' }}', fileChosen(event) { const file = event.target.files[0]; if (file) { const reader = new FileReader(); reader.onload = (e) => this.imageUrl = e.target.result; reader.readAsDataURL(file); } } }">
                         <h3 class="font-semibold text-brand-text text-lg">Upload Foto Produk</h3>
                         <label class="border-2 border-dashed border-brand-border rounded-xl bg-gray-100 p-4 flex justify-center items-center h-64 cursor-pointer hover:bg-gray-50 overflow-hidden relative">
                             <img alt="Foto Produk" class="max-h-full object-contain mix-blend-multiply" :src="imageUrl" />

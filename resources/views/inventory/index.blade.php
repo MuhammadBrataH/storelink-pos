@@ -72,8 +72,21 @@
                                     <td class="py-4 px-4 flex items-center space-x-3">
                                         <div
                                             class="w-10 h-10 bg-gray-100 rounded-md border flex items-center justify-center overflow-hidden">
-                                            <img alt="{{ $product->name }}" class="w-8 h-8 object-cover rounded mix-blend-multiply"
-                                                src="{{ $product->image_url ? asset('storage/' . $product->image_url) : 'https://ui-avatars.com/api/?name='.urlencode($product->name).'&color=7F9CF5&background=EBF4FF' }}" />
+                                            @if($product->image_url)
+                                                <img alt="{{ $product->name }}" class="w-8 h-8 object-cover rounded mix-blend-multiply"
+                                                    src="{{ str_starts_with($product->image_url, 'http') ? $product->image_url : asset('storage/' . $product->image_url) }}" />
+                                            @else
+                                                @php $cat = strtolower($product->category); @endphp
+                                                @if($cat == 'baju')
+                                                    <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l4-1 5-2 5 2 4 1v3l-3 1v10H6V12L3 11V8z" /></svg>
+                                                @elseif($cat == 'celana')
+                                                    <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 3h12v3l-3 16H9L6 6V3z M12 6v16" /></svg>
+                                                @elseif($cat == 'aksesoris')
+                                                    <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                                @else
+                                                    <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>
+                                                @endif
+                                            @endif
                                         </div>
                                         <span class="font-medium text-gray-800 truncate max-w-[200px]"
                                             title="{{ $product->name }}">{{ $product->name }}</span>
@@ -84,14 +97,22 @@
                                     <td class="py-4 px-4">
                                         <div class="flex justify-center mb-2">
                                             <span
-                                                class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold {{ $totalStock > 5 ? 'bg-green-100 text-green-700 border border-green-200' : ($totalStock > 0 ? 'bg-yellow-100 text-yellow-700 border border-yellow-200' : 'bg-red-100 text-red-700 border border-red-200') }}">
+                                                class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold 'bg-gray-100 text-gray-700 border border-gray-200' }}">
                                                 {{ $totalStock }}
                                             </span>
                                         </div>
                                         <div class="flex flex-wrap justify-center gap-1">
                                             @foreach ($product->variations as $variation)
+                                                @php
+                                                    $bgClass = 'bg-green-100 text-green-700 border-green-200';
+                                                    if ($variation->stock == 0) {
+                                                        $bgClass = 'bg-red-100 text-red-700 border-red-200 font-bold';
+                                                    } elseif ($variation->stock <= 5 && $variation->stock > 0) {
+                                                        $bgClass = 'bg-orange-100 text-orange-700 border-orange-200 font-bold';
+                                                    }
+                                                @endphp
                                                 <span
-                                                    class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-700 border border-gray-200">
+                                                    class="inline-flex items-center px-2 py-1 rounded-full text-xs border {{ $bgClass }}">
                                                     {{ $variation->size ?: '-' }}: {{ $variation->stock }}
                                                 </span>
                                             @endforeach

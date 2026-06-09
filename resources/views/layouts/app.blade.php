@@ -152,8 +152,8 @@
         <div class="flex items-center space-x-5">
             <!-- Profile -->
             <div class="flex items-center space-x-3 border-l pl-5 border-gray-200">
-                <img alt="User Avatar" class="h-8 w-8 rounded-full object-cover border border-gray-200 bg-gray-100"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuASaThGtpL0MUG5_G9b0uQ7z1jZRbonGeqvGgJzvhy0QaBok3zCv33d36FEEzkB81Ep0QmHxoyHHuhu0AORseDF7_-5SPJ2UTll04FX1oIa2cNBfLWkZ0-tXUqdGJ_oqFNmrL11bagKrnCT79FGwijKzOu7jzdJ4OVwXupsw330JOnvY32-PWD5UuyAzvvolmIrT-XCTDGbctGpSAme-wxRiZAvTduj3gwL1g4UrtJrjIJ7Bg-vqlZbD_Nmsr5GxAv8sAy8J1Xt-G0" />
+                <!-- tambahkan icon user -->
+                <span class="material-symbols-outlined text-gray-700">person</span>
                 <span class="text-sm font-medium text-gray-700">Halo, {{ auth()->user()->name ?: auth()->user()->username }}!</span>
             </div>
             <!-- Logout Button -->
@@ -172,14 +172,14 @@
         <!-- BEGIN: Sidebar -->
         <aside class="w-20 bg-white border-r border-gray-200 flex flex-col items-center py-6 flex-shrink-0 z-20"
             data-purpose="main-sidebar">
-            <!-- Logo Icon (Dummy) -->
+            <!-- Logo Icon (Dummy)
             <div class="mb-10 text-blue-600">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
                     <path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2"></path>
                 </svg>
-            </div>
+            </div> -->
             <!-- Navigation Icons -->
             <nav class="flex flex-col space-y-4 w-full">
                 <div class="relative flex justify-center items-center w-full py-3">
@@ -225,24 +225,26 @@
                 </div>
 
                 <!-- Users -->
-                <a class="flex justify-center items-center w-full py-3 text-gray-400 hover:text-gray-600 transition-colors group relative {{ request()->routeIs('users.*') ? 'bg-blue-50 text-blue-600 rounded-lg' : '' }}"
-                    href="{{ route('users.index') }}">
+                <div class="relative flex justify-center items-center w-full py-3">
                     @if (request()->routeIs('users.*'))
                         <div class="absolute left-0 top-0 bottom-0 w-1 bg-blue-600 rounded-r-md"></div>
                     @endif
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                    </svg>
-                    <!-- Tooltip -->
-                    <div
-                        class="absolute left-full ml-4 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity pointer-events-none">
-                        Manajemen User
+                    <a class="{{ request()->routeIs('users.*') ? 'bg-blue-50 text-blue-600' : 'text-gray-400 hover:text-gray-600' }} p-2 rounded-lg flex justify-center items-center relative group w-full transition-colors"
+                        href="{{ route('users.index') }}">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                        <!-- Tooltip -->
                         <div
-                            class="absolute right-full top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-4 border-t-transparent border-r-4 border-r-gray-700 border-b-4 border-b-transparent">
+                            class="absolute left-full ml-4 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity pointer-events-none">
+                            Manajemen User
+                            <div
+                                class="absolute right-full top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-4 border-t-transparent border-r-4 border-r-gray-700 border-b-4 border-b-transparent">
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
             </nav>
         </aside>
         <!-- END: Sidebar -->

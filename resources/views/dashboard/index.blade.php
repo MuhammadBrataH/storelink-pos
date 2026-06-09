@@ -94,11 +94,27 @@
 <div class="flex items-center gap-3">
 @php
     $firstDetail = $transaction->details->first();
-    $productImage = $firstDetail && $firstDetail->variation->product->image_url ? $firstDetail->variation->product->image_url : 'https://placehold.co/40x40?text=IMG';
-    $productName = $firstDetail ? $firstDetail->variation->product->name : 'Unknown Product';
+    $product = $firstDetail ? $firstDetail->variation->product : null;
+    $productImage = $product && $product->image_url ? (str_starts_with($product->image_url, 'http') ? $product->image_url : asset('storage/' . $product->image_url)) : null;
+    $productCat = $product ? strtolower($product->category) : '';
+    $productName = $product ? $product->name : 'Unknown Product';
     $totalQty = $transaction->details->sum('quantity');
 @endphp
-<div class="w-10 h-10 rounded bg-surface-variant flex-shrink-0 bg-cover bg-center" style="background-image: url('{{ $productImage }}');"></div>
+<div class="w-10 h-10 rounded bg-surface-variant flex-shrink-0 flex items-center justify-center overflow-hidden">
+    @if($productImage)
+        <img src="{{ $productImage }}" class="w-full h-full object-cover">
+    @else
+        @if($productCat == 'baju')
+            <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l4-1 5-2 5 2 4 1v3l-3 1v10H6V12L3 11V8z" /></svg>
+        @elseif($productCat == 'celana')
+            <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 3h12v3l-3 16H9L6 6V3z M12 6v16" /></svg>
+        @elseif($productCat == 'aksesoris')
+            <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        @else
+            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>
+        @endif
+    @endif
+</div>
 <span class="text-on-surface font-medium">{{ $productName }}</span>
 </div>
 </td>
@@ -162,7 +178,25 @@
 @forelse($lowStockProducts as $item)
 <div class="flex items-center justify-between p-3 rounded-lg bg-surface hover:bg-surface-container-high transition-colors border border-outline-variant/20">
 <div class="flex items-center gap-3">
-<div class="w-12 h-12 rounded bg-surface-variant bg-cover bg-center" style="background-image: url('{{ $item->product->image_url ?? 'https://placehold.co/48x48?text=IMG' }}');"></div>
+@php
+    $itemImage = $item->product->image_url ? (str_starts_with($item->product->image_url, 'http') ? $item->product->image_url : asset('storage/' . $item->product->image_url)) : null;
+    $itemCat = strtolower($item->product->category ?? '');
+@endphp
+<div class="w-12 h-12 rounded bg-surface-variant flex-shrink-0 flex items-center justify-center overflow-hidden">
+    @if($itemImage)
+        <img src="{{ $itemImage }}" class="w-full h-full object-cover">
+    @else
+        @if($itemCat == 'baju')
+            <svg class="w-7 h-7 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l4-1 5-2 5 2 4 1v3l-3 1v10H6V12L3 11V8z" /></svg>
+        @elseif($itemCat == 'celana')
+            <svg class="w-7 h-7 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 3h12v3l-3 16H9L6 6V3z M12 6v16" /></svg>
+        @elseif($itemCat == 'aksesoris')
+            <svg class="w-7 h-7 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        @else
+            <svg class="w-7 h-7 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>
+        @endif
+    @endif
+</div>
 <div>
 <h4 class="text-label-lg font-label-lg text-on-surface">{{ $item->product->name }} - {{ $item->size }} / {{ $item->color }}</h4>
 <p class="text-body-sm font-body-sm text-red-500 flex items-center gap-1">

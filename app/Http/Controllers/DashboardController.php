@@ -20,7 +20,7 @@ class DashboardController extends Controller
             ->groupBy('products.id', 'products.name')
             ->orderByDesc('total_sold')
             ->first();  
-        $lowStockCount = ProductVariation::where('stock', '<=', 5)->count();
+        $lowStockCount = ProductVariation::where('stock', '<=', 5)->where('stock', '>', 0)->count();
         $today = Carbon::today();
         $todaySalesAmount = Transaction::whereDate('created_at', $today)->sum('total_amount');
         $todayTransactionsCount = Transaction::whereDate('created_at', $today)->count();
@@ -49,6 +49,7 @@ class DashboardController extends Controller
         // ke tabel products untuk setiap baris variasi (N+1 query problem) yang membuat aplikasi menjadi sangat lambat.
         $lowStockProducts = ProductVariation::with('product')
             ->where('stock', '<=', 5)
+            ->where('stock', '>', 0)
             ->take(5)
             ->get();
         return view('dashboard.index', compact(

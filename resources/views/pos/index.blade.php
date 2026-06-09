@@ -145,9 +145,8 @@
         </div>
         <div class="flex items-center gap-4">
             <div class="flex items-center space-x-3 border-r pr-5 border-outline-variant">
-                <img alt="User Avatar" class="h-8 w-8 rounded-full object-cover border border-outline-variant bg-surface"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuASaThGtpL0MUG5_G9b0uQ7z1jZRbonGeqvGgJzvhy0QaBok3zCv33d36FEEzkB81Ep0QmHxoyHHuhu0AORseDF7_-5SPJ2UTll04FX1oIa2cNBfLWkZ0-tXUqdGJ_oqFNmrL11bagKrnCT79FGwijKzOu7jzdJ4OVwXupsw330JOnvY32-PWD5UuyAzvvolmIrT-XCTDGbctGpSAme-wxRiZAvTduj3gwL1g4UrtJrjIJ7Bg-vqlZbD_Nmsr5GxAv8sAy8J1Xt-G0" />
-                <span class="text-sm font-medium text-on-surface">Kasir: {{ auth()->user()->name ?: auth()->user()->username }}</span>
+            <span class="material-symbols-outlined text-gray-700">person</span>    
+            <span class="text-sm font-medium text-on-surface">Kasir: {{ auth()->user()->name ?: auth()->user()->username }}</span>
             </div>
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
@@ -190,8 +189,26 @@
         <div class="flex-1 overflow-y-auto hide-scroll grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 pb-20 auto-rows-max">
             <template x-for="product in filteredProducts" :key="product.id">
               <article class="bg-surface-container-lowest rounded-xl p-2 flex flex-col gap-2 ambient-shadow-1 border border-surface-variant h-fit">
-                <div class="aspect-square rounded-lg overflow-hidden bg-surface-container-highest">
-                  <img :alt="product.name" class="w-full h-full object-cover" :src="product.image_url" />
+                <div class="aspect-square rounded-lg overflow-hidden bg-surface-container-highest flex items-center justify-center">
+                  <template x-if="product.image_url">
+                    <img :alt="product.name" class="w-full h-full object-cover" :src="product.image_url" />
+                  </template>
+                  <template x-if="!product.image_url">
+                    <div class="w-full h-full flex items-center justify-center bg-gray-50">
+                      <template x-if="product.category.toLowerCase() === 'baju'">
+                        <svg class="w-12 h-12 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l4-1 5-2 5 2 4 1v3l-3 1v10H6V12L3 11V8z" /></svg>
+                      </template>
+                      <template x-if="product.category.toLowerCase() === 'celana'">
+                        <svg class="w-12 h-12 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 3h12v3l-3 16H9L6 6V3z M12 6v16" /></svg>
+                      </template>
+                      <template x-if="product.category.toLowerCase() === 'aksesoris'">
+                        <svg class="w-12 h-12 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                      </template>
+                      <template x-if="!['baju', 'celana', 'aksesoris'].includes(product.category.toLowerCase())">
+                        <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>
+                      </template>
+                    </div>
+                  </template>
                 </div>
                 <div class="flex flex-col flex-1">
                   <h3 class="text-label-md font-label-md font-bold text-on-surface line-clamp-1 mb-1" x-text="product.name"></h3>
@@ -464,7 +481,7 @@
                         'id' => $p->id, 
                         'name' => $p->name, 
                         'category' => $p->category ?? 'Semua',
-                        'image_url' => $p->image_url ? asset('storage/' . $p->image_url) : 'https://ui-avatars.com/api/?name='.urlencode($p->name).'&color=7F9CF5&background=EBF4FF',
+                        'image_url' => $p->image_url ? (str_starts_with($p->image_url, 'http') ? $p->image_url : asset('storage/' . $p->image_url)) : null,
                         'variations' => $p->variations->map(function($v) {
                             return [
                                 'id' => $v->id,
