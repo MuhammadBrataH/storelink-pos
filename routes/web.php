@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PosController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     if (Auth::check()) {
@@ -26,9 +27,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Admin Routes (Dashboard & Inventory)
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/home', function () {
-        return view('home');
-    })->name('home');
+    Route::get('/home', [DashboardController::class, 'index'])->name('home');
 
     Route::prefix('inventory')->name('inventory.')->group(function () {
         Route::get('/', [ProductController::class, 'index'])->name('index');
@@ -38,7 +37,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::put('/{product}', [ProductController::class, 'update'])->name('update');
         Route::delete('/{product}', [ProductController::class, 'destroy'])->name('destroy');
     });
-
 
     Route::resource('users', App\Http\Controllers\UserController::class)->except(['show']);
 });
