@@ -171,7 +171,7 @@
                 </div>
                 <div class="flex flex-col flex-1">
                   <h3 class="text-label-md font-label-md font-bold text-on-surface line-clamp-1 mb-1" x-text="product.name"></h3>
-                  <p class="text-[11px] font-semibold text-on-surface mt-auto" x-text="product.variations.length > 0 ? formatRupiah(product.variations[0].price) : 'Rp0'"></p>
+                  <p class="text-[11px] font-semibold text-on-surface mt-auto" x-text="getPriceRange(product)"></p>
                   <p class="text-[10px] text-on-surface-variant">Total Stok: <span x-text="product.variations.reduce((sum, v) => sum + v.stock, 0)"></span></p>
                 </div>
                 <button @click="openVariationModal(product)" class="w-full py-1.5 bg-surface border border-primary-container text-primary-container hover:bg-surface-container-high rounded-lg text-label-md font-label-md flex items-center justify-center gap-1 transition-colors mt-1">
@@ -581,6 +581,18 @@
 
                 formatRupiah(number) {
                     return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(number);
+                },
+
+                getPriceRange(product) {
+                    if (!product.variations || product.variations.length === 0) return 'Rp0';
+                    let prices = product.variations.map(v => parseFloat(v.price) || 0);
+                    let minPrice = Math.min(...prices);
+                    let maxPrice = Math.max(...prices);
+                    if (minPrice === maxPrice) {
+                        return this.formatRupiah(minPrice);
+                    } else {
+                        return this.formatRupiah(minPrice) + ' - ' + this.formatRupiah(maxPrice);
+                    }
                 },
 
                 checkout() {
