@@ -23,13 +23,15 @@ class Product extends Model
     }
     public function getStockStatusAttribute()
     {
-        $totalStock = $this->variations->sum('stock');
-
-        if ($totalStock === 0) {
+        if ($this->variations->isEmpty() || $this->variations->every(fn($v) => $v->stock == 0)) {
             return '<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold border bg-red-100 text-red-700 border-red-200">Habis</span>';
         }
 
-        if ($totalStock <= 5) {
+        if ($this->variations->contains(fn($v) => $v->stock == 0)) {
+            return '<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold border bg-orange-100 text-red-700 border-red-200" title="Ada varian yang habis">Habis Sebagian</span>';
+        }
+
+        if ($this->variations->contains(fn($v) => $v->stock <= 5)) {
             return '<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold border bg-orange-100 text-orange-700 border-orange-200">Rendah</span>';
         }
 
