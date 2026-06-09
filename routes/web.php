@@ -12,7 +12,7 @@ Route::get('/', function () {
         $user = Auth::user();
 
         return $user && $user->role === 'admin'
-            ? redirect()->route('admin.home')
+            ? redirect()->route('home')
             : redirect()->route('pos.index');
     }
 
@@ -26,9 +26,9 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Admin Routes (Dashboard & Inventory)
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin', function () {
-        return view('admin.home');
-    })->name('admin.home');
+    Route::get('/home', function () {
+        return view('home');
+    })->name('home');
 
     Route::prefix('inventory')->name('inventory.')->group(function () {
         Route::get('/', [ProductController::class, 'index'])->name('index');
@@ -39,10 +39,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::delete('/{product}', [ProductController::class, 'destroy'])->name('destroy');
     });
 
-    Route::prefix('admin')->name('admin.')->group(function () {
-        Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
-        Route::resource('/inventory', \App\Http\Controllers\Admin\ProductController::class);
-    });
 
     Route::resource('users', App\Http\Controllers\UserController::class)->except(['show']);
 });
