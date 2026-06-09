@@ -190,12 +190,6 @@
           <h2 class="text-headline-sm font-headline-sm text-on-surface flex items-center gap-2">
             Keranjang Belanja <span class="text-on-surface-variant" x-text="'(' + cart.length + ')'"></span>
           </h2>
-          <div class="mt-2 text-body-sm font-body-sm text-on-surface-variant">
-            Pelanggan:
-            <button class="text-primary-container font-medium hover:underline">
-              [Pilih Pelanggan]
-            </button>
-          </div>
         </div>
 
         <!-- Table Header -->
