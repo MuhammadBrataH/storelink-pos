@@ -45,13 +45,15 @@ class ProductController extends Controller
         // Ambil produk beserta variasi dan total stoknya untuk tabel.
         $products = (clone $productQuery)->paginate(5)->withQueryString();
 
-        // Hitung jumlah produk dengan stok rendah (lebih dari 0 tapi <= 5).
-        $lowStockProducts = $summaryProducts->where('total_stock', '>', 0)
-            ->where('total_stock', '<=', 5)
-            ->count();
+        // Hitung jumlah produk dengan stok rendah (ada varian yang stoknya > 0 tapi <= 5).
+        $lowStockProducts = $summaryProducts->filter(function ($product) {
+            return $product->variations->contains(fn ($v) => $v->stock > 0 && $v->stock <= 5);
+        })->count();
 
-        // Hitung jumlah produk yang stoknya habis (total stok == 0).
-        $outOfStockProducts = $summaryProducts->where('total_stock', 0)->count();
+        // Hitung jumlah produk yang stoknya habis (ada varian yang stoknya == 0).
+        $outOfStockProducts = $summaryProducts->filter(function ($product) {
+            return $product->variations->contains('stock', 0) || $product->variations->isEmpty();
+        })->count();
 
         return view('inventory.index', compact(
             'products',
