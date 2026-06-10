@@ -16,7 +16,12 @@ $app = Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        $exceptions->render(function (\Throwable $e) {
+            echo "<h1>Original Error:</h1>";
+            echo "<pre>" . $e->getMessage() . "\n" . $e->getFile() . " on line " . $e->getLine() . "</pre>";
+            echo "<pre>" . $e->getTraceAsString() . "</pre>";
+            die();
+        });
     })->create();
 
 // Vercel serverless environment is read-only except for /tmp.
