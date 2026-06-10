@@ -78,7 +78,7 @@
               "spacing": {
                       "cart-panel-width": "380px",
                       "gutter": "16px",
-                      "sidebar-width": "80px",
+                      "sidebar-width": "256px",
                       "margin-mobile": "16px",
                       "unit": "4px",
                       "margin-desktop": "24px"
@@ -170,87 +170,45 @@
 
     <div class="flex h-[calc(100vh-4rem)] overflow-hidden">
         <!-- BEGIN: Sidebar -->
-        <aside class="w-20 bg-white border-r border-gray-200 flex flex-col items-center py-6 flex-shrink-0 z-20"
+        <aside class="w-64 bg-white border-r border-gray-200 flex flex-col py-6 flex-shrink-0 z-20"
             data-purpose="main-sidebar">
-            <!-- Logo Icon (Dummy)
-            <div class="mb-10 text-blue-600">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round"
-                        stroke-width="2"></path>
-                </svg>
-            </div> -->
-            <!-- Navigation Icons -->
-            <nav class="flex flex-col space-y-4 w-full">
-                <div class="relative flex justify-center items-center w-full py-3">
-                    @if (request()->routeIs('home'))
-                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-blue-600 rounded-r-md"></div>
-                    @endif
-                    <a class="{{ request()->routeIs('home') ? 'bg-blue-50 text-blue-600' : 'text-gray-400 hover:text-gray-600' }} p-2 rounded-lg flex justify-center items-center relative group w-full transition-colors"
+            <!-- Navigation Items -->
+            <nav class="flex flex-col space-y-2 w-full px-4">
+                <div class="w-full">
+                    <a class="{{ request()->routeIs('home') ? 'bg-blue-50 text-blue-700 font-semibold' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50' }} px-4 py-3 rounded-xl flex items-center group w-full transition-all duration-200"
                         href="{{ route('home') }}">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                        <svg class="w-6 h-6 mr-3 {{ request()->routeIs('home') ? 'text-blue-600' : 'text-gray-400 group-hover:text-gray-600' }}" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
                         </svg>
-                        <!-- Tooltip -->
-                        <div class="absolute left-full ml-4 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity pointer-events-none">
-                            Dashboard
-                            <div class="absolute right-full top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-4 border-t-transparent border-r-4 border-r-gray-700 border-b-4 border-b-transparent"></div>
-                        </div>
-                    </a>
-                </div>
-                <!-- Inventory (Active) arahkan ke -->
-                <div class="relative flex justify-center items-center w-full py-3">
-                    @if (request()->routeIs('inventory.*'))
-                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-blue-600 rounded-r-md"></div>
-                    @endif
-                    <a class="{{ request()->routeIs('inventory.*') ? 'bg-blue-50 text-blue-600' : 'text-gray-400 hover:text-gray-600' }} p-2 rounded-lg flex justify-center items-center relative group w-full"
-                        href="{{ route('inventory.index') }}">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
-                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                        </svg>
-                        <!-- Tooltip -->
-                        <div
-                            class="absolute left-full ml-4 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity pointer-events-none">
-                            Inventory Page
-                            <div
-                                class="absolute right-full top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-4 border-t-transparent border-r-4 border-r-gray-700 border-b-4 border-b-transparent">
-                            </div>
-                        </div>
+                        <span class="text-sm">Dashboard</span>
                     </a>
                 </div>
 
-                <!-- Users -->
-                <div class="relative flex justify-center items-center w-full py-3">
-                    @if (request()->routeIs('users.*'))
-                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-blue-600 rounded-r-md"></div>
-                    @endif
-                    <a class="{{ request()->routeIs('users.*') ? 'bg-blue-50 text-blue-600' : 'text-gray-400 hover:text-gray-600' }} p-2 rounded-lg flex justify-center items-center relative group w-full transition-colors"
+                <div class="w-full">
+                    <a class="{{ request()->routeIs('inventory.*') ? 'bg-blue-50 text-blue-700 font-semibold' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50' }} px-4 py-3 rounded-xl flex items-center group w-full transition-all duration-200"
+                        href="{{ route('inventory.index') }}">
+                        <svg class="w-6 h-6 mr-3 {{ request()->routeIs('inventory.*') ? 'text-blue-600' : 'text-gray-400 group-hover:text-gray-600' }}" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                        </svg>
+                        <span class="text-sm">Inventory</span>
+                    </a>
+                </div>
+
+                <div class="w-full">
+                    <a class="{{ request()->routeIs('users.*') ? 'bg-blue-50 text-blue-700 font-semibold' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50' }} px-4 py-3 rounded-xl flex items-center group w-full transition-all duration-200"
                         href="{{ route('users.index') }}">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
+                        <svg class="w-6 h-6 mr-3 {{ request()->routeIs('users.*') ? 'text-blue-600' : 'text-gray-400 group-hover:text-gray-600' }}" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                         </svg>
-                        <!-- Tooltip -->
-                        <div
-                            class="absolute left-full ml-4 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity pointer-events-none">
-                            Manajemen User
-                            <div
-                                class="absolute right-full top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-4 border-t-transparent border-r-4 border-r-gray-700 border-b-4 border-b-transparent">
-                            </div>
-                        </div>
+                        <span class="text-sm">Manajemen User</span>
                     </a>
                 </div>
             </nav>
 
             <!-- Nubra Copyright Logo -->
-            <div class="mt-auto pt-6 pb-2 px-2 flex flex-col items-center justify-center opacity-80 hover:opacity-100 transition-opacity cursor-default w-full border-t border-gray-100">
-                <span class="text-[9px] text-gray-400 font-medium mb-1.5 tracking-widest uppercase">Powered by</span>
-                <img src="{{ asset('image/logo_nubra.png') }}" alt="Nubra Solutions" class="w-16 object-contain" />
+            <div class="mt-auto pt-6 pb-4 px-6 flex flex-col items-center justify-center w-full border-t border-gray-100">
+                <span class="text-[11px] text-gray-500 font-semibold mb-3 tracking-widest uppercase bg-gray-50 px-3 py-1 rounded-full">Powered by</span>
+                <img src="{{ asset('image/logo_nubra.png') }}" alt="Nubra Solutions" class="w-40 object-contain hover:scale-105 transition-transform duration-300 drop-shadow-sm" />
             </div>
         </aside>
         <!-- END: Sidebar -->
