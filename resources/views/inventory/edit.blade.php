@@ -6,6 +6,7 @@
             'variations',
             $product->variations
                 ->map(fn($variation) => [
+                    'id' => $variation->id,
                     'size' => $variation->size,
                     'color' => $variation->color,
                     'price_capital' => $variation->price_capital,
@@ -84,22 +85,26 @@
 
                 <section x-data="{ variations: {{ json_encode($variations) }} }">
                     <h3 class="font-semibold text-brand-text text-lg mb-4">Variasi Produk</h3>
-                    <div class="space-y-4">
-                        <template x-for="(variation, index) in variations" :key="index">
-                            <div class="grid grid-cols-5 gap-4">
-                                <input class="w-full rounded-md border-brand-border focus:ring-brand-blue focus:border-brand-blue sm:text-sm h-10" :name="`variations[${index}][size]`" placeholder="Ukuran (S/M/L)" type="text" x-model="variation.size" />
+                    <div class="space-y-4" x-sort="variations = $event">
+                        <template x-for="(variation, index) in variations" :key="variation.id || index">
+                            <div class="grid grid-cols-6 gap-4" x-sort:item="variation">
+                                <div class="w-10 flex items-center justify-center text-brand-muted cursor-move hover:text-brand-blue transition-colors" x-sort:handle title="Tarik untuk memindahkan">
+                                    <span class="material-symbols-outlined text-[20px]">drag_indicator</span>
+                                </div>
+                                <input type="hidden" :name="`variations[${index}][id]`" x-model="variation.id" />
+                                <input class="w-full rounded-md border-brand-border focus:ring-brand-blue focus:border-brand-blue sm:text-sm h-10" :name="`variations[${index}][size]`" placeholder="Ukuran" type="text" x-model="variation.size" />
                                 <input class="w-full rounded-md border-brand-border focus:ring-brand-blue focus:border-brand-blue sm:text-sm h-10" :name="`variations[${index}][color]`" placeholder="Warna" type="text" x-model="variation.color" />
                                 <input class="w-full rounded-md border-brand-border focus:ring-brand-blue focus:border-brand-blue sm:text-sm h-10" :name="`variations[${index}][price_capital]`" placeholder="Harga modal" type="text" x-model="variation.price_capital" />
                                 <input class="w-full rounded-md border-brand-border focus:ring-brand-blue focus:border-brand-blue sm:text-sm h-10" :name="`variations[${index}][price_sell]`" placeholder="Harga jual" type="text" x-model="variation.price_sell" />
                                 <div class="flex items-center gap-2">
                                     <input class="w-full rounded-md border-brand-border focus:ring-brand-blue focus:border-brand-blue sm:text-sm h-10" min="0" :name="`variations[${index}][stock]`" placeholder="Stok" type="number" x-model="variation.stock" />
-                                    <button class="text-red-500 hover:text-red-700 disabled:opacity-50" type="button" @click="if(variations.length > 1) variations.splice(index, 1)" :disabled="variations.length === 1"><i class="fa-regular fa-trash-can"></i></button>
+                                    <button class="text-red-500 hover:text-red-700 disabled:opacity-50" type="button" @click="if(variations.length > 1) variations.splice(index, 1)" :disabled="variations.length === 1" title="Hapus Variasi"><span class="material-symbols-outlined text-[20px]">delete</span></button>
                                 </div>
                             </div>
                         </template>
                     </div>
-                    <button class="mt-3 inline-flex items-center px-4 py-2 border border-brand-border rounded-md shadow-sm text-sm font-medium text-brand-text bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-blue" type="button" @click="variations.push({size: '', color: '', price_capital: '', price_sell: '', stock: ''})">
-                        <i class="fa-solid fa-plus mr-2 text-brand-muted"></i> Tambah Variasi
+                    <button class="mt-3 inline-flex items-center px-4 py-2 border border-brand-border rounded-md shadow-sm text-sm font-medium text-brand-text bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-blue" type="button" @click="variations.push({id: null, size: '', color: '', price_capital: '', price_sell: '', stock: ''})">
+                        <span class="material-symbols-outlined text-[20px] mr-1 text-brand-muted">add</span> Tambah Variasi
                     </button>
                 </section>
 

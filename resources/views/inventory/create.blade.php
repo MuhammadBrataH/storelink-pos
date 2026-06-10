@@ -99,9 +99,12 @@
                 <!-- Variasi Produk -->
                 <section x-data="{ variations: {{ json_encode($variations) }} }">
                     <h4 class="font-medium text-gray-800 mb-4">Variasi Produk</h4>
-                    <div class="space-y-4">
+                    <div class="space-y-4" x-sort="variations = $event">
                         <template x-for="(variation, index) in variations" :key="index">
-                            <div class="grid grid-cols-5 gap-4">
+                            <div class="grid grid-cols-6 gap-4" x-sort:item="variation">
+                                <div class="w-10 flex items-center justify-center text-brand-muted cursor-move hover:text-brand-blue transition-colors" x-sort:handle title="Tarik untuk memindahkan">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"></path></svg>
+                                </div>
                                 <input
                                     class="border border-gray-300 text-gray-800 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
                                     :name="`variations[${index}][size]`" placeholder="Ukuran (S/M/L/XL/XXL)" type="text"

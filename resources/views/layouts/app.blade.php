@@ -10,6 +10,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     @endif
 
+    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/sort@3.x.x/dist/cdn.min.js" defer></script>
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -170,7 +171,7 @@
 
     <div class="flex h-[calc(100vh-4rem)] overflow-hidden">
         <!-- BEGIN: Sidebar -->
-        <aside class="w-64 bg-white border-r border-gray-200 flex flex-col py-6 flex-shrink-0 z-20"
+        <aside class="w-48 bg-white border-r border-gray-200 flex flex-col py-6 flex-shrink-0 z-20"
             data-purpose="main-sidebar">
             <!-- Navigation Items -->
             <nav class="flex flex-col space-y-2 w-full px-4">

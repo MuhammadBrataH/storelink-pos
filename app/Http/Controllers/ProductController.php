@@ -181,19 +181,34 @@ class ProductController extends Controller
                 'image_url' => $imageUrl,
             ]);
 
-            // Hapus variasi lama agar sinkron dengan input terbaru.
-            $product->variations()->delete();
+            // Dapatkan ID variasi yang dikirimkan dari form.
+            $submittedVariationIds = collect($validated['variations'])->pluck('id')->filter()->toArray();
 
-            // Loop setiap variasi baru lalu simpan ulang agar sinkron.
+            // Hapus variasi yang tidak ada di form (soft delete)
+            $product->variations()->whereNotIn('id', $submittedVariationIds)->delete();
+
+            // Loop setiap variasi yang dikirimkan
             foreach ($validated['variations'] as $variation) {
-                ProductVariation::create([
-                    'product_id' => $product->id,
-                    'size' => $variation['size'] ?? null,
-                    'color' => $variation['color'] ?? null,
-                    'price_capital' => $variation['price_capital'],
-                    'price_sell' => $variation['price_sell'],
-                    'stock' => $variation['stock'],
-                ]);
+                if (!empty($variation['id'])) {
+                    // Update variasi yang sudah ada
+                    ProductVariation::where('id', $variation['id'])->where('product_id', $product->id)->update([
+                        'size' => $variation['size'] ?? null,
+                        'color' => $variation['color'] ?? null,
+                        'price_capital' => $variation['price_capital'],
+                        'price_sell' => $variation['price_sell'],
+                        'stock' => $variation['stock'],
+                    ]);
+                } else {
+                    // Buat variasi baru
+                    ProductVariation::create([
+                        'product_id' => $product->id,
+                        'size' => $variation['size'] ?? null,
+                        'color' => $variation['color'] ?? null,
+                        'price_capital' => $variation['price_capital'],
+                        'price_sell' => $variation['price_sell'],
+                        'stock' => $variation['stock'],
+                    ]);
+                }
             }
         });
 
