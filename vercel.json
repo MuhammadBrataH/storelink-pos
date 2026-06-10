@@ -37,6 +37,7 @@
         "APP_ENV": "production",
         "APP_DEBUG": "false",
         "LOG_CHANNEL": "stderr",
-        "APP_URL": "https://storelink.vercel.app"
+        "APP_URL": "https://storelink.vercel.app",
+        "SESSION_DRIVER": "cookie"
     }
 }
