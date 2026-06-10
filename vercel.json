@@ -21,6 +21,10 @@
             "dest": "/public/images/$1"
         },
         {
+            "src": "/image/(.*)",
+            "dest": "/public/image/$1"
+        },
+        {
             "src": "/storage/(.*)",
             "dest": "/public/storage/$1"
         },
