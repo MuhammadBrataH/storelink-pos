@@ -208,7 +208,7 @@
             <!-- Nubra Copyright Logo -->
             <div class="mt-auto pt-6 pb-4 px-6 flex flex-col items-center justify-center w-full border-t border-gray-100 text-center">
                 <span class="text-[11px] text-gray-500 font-semibold mb-3 tracking-widest uppercase bg-gray-50 px-3 py-1 rounded-full inline-block">Powered by</span>
-                <img src="{{ asset('image/logo_nubra.png') }}" alt="Nubra Solutions" class="w-36 object-contain hover:scale-105 transition-transform duration-300 drop-shadow-sm mx-auto" />
+                <img src="{{ asset('image/logo_nubra.png') }}" alt="Nubra Solutions" class="w-20 object-contain hover:scale-105 transition-transform duration-300 drop-shadow-sm mx-auto" />
             </div>
         </aside>
         <!-- END: Sidebar -->
