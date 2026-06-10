@@ -24,17 +24,17 @@ class Product extends Model
     public function getStockStatusAttribute()
     {
         if ($this->variations->isEmpty() || $this->variations->every(fn($v) => $v->stock == 0)) {
-            return '<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold border bg-red-100 text-red-700 border-red-200">Habis</span>';
+            return '<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold border bg-red-100 text-red-700 border-red-200 whitespace-nowrap">Habis</span>';
         }
 
         if ($this->variations->contains(fn($v) => $v->stock == 0)) {
-            return '<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold border bg-orange-100 text-red-700 border-red-200" title="Ada varian yang habis">Habis Sebagian</span>';
+            return '<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold border bg-orange-100 text-red-700 border-red-200 whitespace-nowrap" title="Ada varian yang habis">Habis Sebagian</span>';
         }
 
         if ($this->variations->contains(fn($v) => $v->stock <= 5)) {
-            return '<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold border bg-orange-100 text-orange-700 border-orange-200">Rendah</span>';
+            return '<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold border bg-orange-100 text-orange-700 border-orange-200 whitespace-nowrap">Rendah</span>';
         }
 
-        return '<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold border bg-green-100 text-green-700 border-green-200">Aman</span>';
+        return '<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold border bg-green-100 text-green-700 border-green-200 whitespace-nowrap">Aman</span>';
     }
 }

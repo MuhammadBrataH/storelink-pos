@@ -24,25 +24,21 @@
             </div>
             <!-- Summary Cards -->
             <div class="grid grid-cols-4 gap-4 mb-6">
-                <div
-                    class="bg-white border border-gray-200 rounded-xl p-4 flex items-center justify-center space-x-2 shadow-sm">
-                    <span class="text-gray-500 text-sm">Total Produk:</span>
-                    <span class="font-bold text-gray-800 text-lg">{{ $totalProducts }}</span>
+                <div class="bg-white border border-gray-200 rounded-xl p-4 flex flex-col items-center justify-center text-center shadow-sm">
+                    <span class="text-gray-500 text-sm mb-1">Total Produk:</span>
+                    <span class="font-bold text-gray-800 text-lg whitespace-nowrap">{{ $totalProducts }}</span>
                 </div>
-                <div
-                    class="bg-white border border-gray-200 rounded-xl p-4 flex items-center justify-center space-x-2 shadow-sm">
-                    <span class="text-gray-500 text-sm">Total Nilai:</span>
-                    <span class="font-bold text-gray-800 text-lg">Rp {{ number_format($totalValue, 0, ',', '.') }}</span>
+                <div class="bg-white border border-gray-200 rounded-xl p-4 flex flex-col items-center justify-center text-center shadow-sm">
+                    <span class="text-gray-500 text-sm mb-1">Total Nilai:</span>
+                    <span class="font-bold text-gray-800 text-lg whitespace-nowrap">Rp {{ number_format($totalValue, 0, ',', '.') }}</span>
                 </div>
-                <div
-                    class="bg-white border border-gray-200 rounded-xl p-4 flex items-center justify-center space-x-2 shadow-sm">
-                    <span class="text-gray-500 text-sm">Produk Stok Rendah:</span>
-                    <span class="font-bold text-gray-800 text-lg">{{ $lowStockProducts }}</span>
+                <div class="bg-white border border-gray-200 rounded-xl p-4 flex flex-col items-center justify-center text-center shadow-sm">
+                    <span class="text-gray-500 text-sm mb-1">Produk Stok Rendah:</span>
+                    <span class="font-bold text-gray-800 text-lg whitespace-nowrap">{{ $lowStockProducts }}</span>
                 </div>
-                <div
-                    class="bg-white border border-gray-200 rounded-xl p-4 flex items-center justify-center space-x-2 shadow-sm">
-                    <span class="text-gray-500 text-sm">Produk Habis:</span>
-                    <span class="font-bold text-gray-800 text-lg">{{ $outOfStockProducts }}</span>
+                <div class="bg-white border border-gray-200 rounded-xl p-4 flex flex-col items-center justify-center text-center shadow-sm">
+                    <span class="text-gray-500 text-sm mb-1">Produk Habis:</span>
+                    <span class="font-bold text-gray-800 text-lg whitespace-nowrap">{{ $outOfStockProducts }}</span>
                 </div>
             </div>
             <!-- Data Table Section -->
@@ -55,9 +51,9 @@
                                 <th class="py-3 px-4">ID Produk</th>
                                 <th class="py-3 px-4">Nama Produk</th>
                                 <th class="py-3 px-4">Kategori</th>
-                                <th class="py-3 px-4">Harga Jual (Rp)</th>
-                                <th class="py-3 px-4 text-center">Stok Saat Ini</th>
-                                <th class="py-3 px-4">Status Stok</th>
+                                <th class="py-3 px-4 whitespace-nowrap">Harga Jual (Rp)</th>
+                                <th class="py-3 px-4 text-center whitespace-nowrap">Stok Saat Ini</th>
+                                <th class="py-3 px-4 whitespace-nowrap">Status Stok</th>
                                 <th class="py-3 px-4 text-center">Aksi</th>
                             </tr>
                         </thead>
