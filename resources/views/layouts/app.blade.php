@@ -248,9 +248,9 @@
             </nav>
 
             <!-- Nubra Copyright Logo -->
-            <div class="mt-auto pt-6 pb-2 px-2 flex flex-col items-center justify-center opacity-60 hover:opacity-100 transition-opacity cursor-default w-full border-t border-gray-100">
+            <div class="mt-auto pt-6 pb-2 px-2 flex flex-col items-center justify-center opacity-80 hover:opacity-100 transition-opacity cursor-default w-full border-t border-gray-100">
                 <span class="text-[9px] text-gray-400 font-medium mb-1.5 tracking-widest uppercase">Powered by</span>
-                <img src="{{ asset('image/logo_nubra.png') }}" alt="Nubra Solutions" class="w-12 object-contain" />
+                <img src="{{ asset('image/logo_nubra.png') }}" alt="Nubra Solutions" class="w-16 object-contain" />
             </div>
         </aside>
         <!-- END: Sidebar -->

@@ -194,9 +194,9 @@
 <!-- Bottom Decorative Footer -->
 <div class="bg-surface-bright/40 py-4 border-t border-white/20 text-center backdrop-blur-md flex flex-col items-center justify-center gap-1">
     <p class="font-label-md text-label-md text-outline">Storelink POS System v1.0.0</p>
-    <div class="flex flex-col items-center justify-center opacity-70 hover:opacity-100 transition-opacity mt-1">
+    <div class="flex flex-col items-center justify-center opacity-80 hover:opacity-100 transition-opacity mt-1">
         <span class="text-[10px] text-outline font-medium tracking-wider uppercase mb-0.5">Powered by</span>
-        <img src="{{ asset('image/logo_nubra.png') }}" alt="Nubra Solutions" class="h-6 object-contain" />
+        <img src="{{ asset('image/logo_nubra.png') }}" alt="Nubra Solutions" class="h-10 object-contain" />
     </div>
 </div>
 </main>

@@ -283,9 +283,9 @@
           </button>
 
           <!-- Nubra Copyright Logo -->
-          <div class="mt-4 flex flex-col items-center justify-center opacity-60 hover:opacity-100 transition-opacity">
+          <div class="mt-4 flex flex-col items-center justify-center opacity-80 hover:opacity-100 transition-opacity">
               <span class="text-[9px] text-on-surface-variant font-medium mb-1 tracking-widest uppercase">Powered by</span>
-              <img src="{{ asset('image/logo_nubra.png') }}" alt="Nubra Solutions" class="h-6 object-contain" />
+              <img src="{{ asset('image/logo_nubra.png') }}" alt="Nubra Solutions" class="h-10 object-contain" />
           </div>
         </div>
       </aside>
