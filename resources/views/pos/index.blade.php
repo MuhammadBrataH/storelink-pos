@@ -281,6 +281,12 @@
           <button @click="openPaymentModal" class="w-full py-3 bg-[#10B981] text-white rounded-lg text-label-lg font-label-lg font-bold hover:bg-emerald-600 transition-colors shadow-md mt-2">
             Pilih Pembayaran
           </button>
+
+          <!-- Nubra Copyright Logo -->
+          <div class="mt-4 flex flex-col items-center justify-center opacity-60 hover:opacity-100 transition-opacity">
+              <span class="text-[9px] text-on-surface-variant font-medium mb-1 tracking-widest uppercase">Powered by</span>
+              <img src="{{ asset('images/nubra-logo.png') }}" alt="Nubra Solutions" class="h-6 object-contain" />
+          </div>
         </div>
       </aside>
     </main>
