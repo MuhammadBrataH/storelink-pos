@@ -94,9 +94,9 @@
 <div class="flex items-center gap-3">
 @php
     $firstDetail = $transaction->details->first();
-    $product = $firstDetail ? $firstDetail->variation->product : null;
+    $product = $firstDetail && $firstDetail->variation ? $firstDetail->variation->product : null;
     $productImage = $product && $product->image_url ? (str_starts_with($product->image_url, 'http') ? $product->image_url : asset('storage/' . $product->image_url)) : null;
-    $productCat = $product ? strtolower($product->category) : '';
+    $productCat = $product ? strtolower($product->category ?? '') : '';
     $productName = $product ? $product->name : 'Unknown Product';
     $totalQty = $transaction->details->sum('quantity');
 @endphp
@@ -145,10 +145,10 @@
                     @foreach($transaction->details as $detail)
                     <tr class="border-b border-outline-variant/10 last:border-0">
                         <td class="py-2">
-                            <span class="font-medium text-on-surface">{{ $detail->variation->product->name }}</span>
+                            <span class="font-medium text-on-surface">{{ $detail->variation?->product?->name ?? 'Produk Terhapus' }}</span>
                             <div class="text-xs text-on-surface-variant mt-0.5 flex gap-2">
-                                @if($detail->variation->size) <span class="bg-surface-variant px-1.5 py-0.5 rounded">Size: {{ $detail->variation->size }}</span> @endif
-                                @if($detail->variation->color) <span class="bg-surface-variant px-1.5 py-0.5 rounded">Warna: {{ $detail->variation->color }}</span> @endif
+                                @if($detail->variation?->size) <span class="bg-surface-variant px-1.5 py-0.5 rounded">Size: {{ $detail->variation->size }}</span> @endif
+                                @if($detail->variation?->color) <span class="bg-surface-variant px-1.5 py-0.5 rounded">Warna: {{ $detail->variation->color }}</span> @endif
                             </div>
                         </td>
                         <td class="py-2 text-right text-on-surface">Rp {{ number_format($detail->price_sell, 0, ',', '.') }}</td>
