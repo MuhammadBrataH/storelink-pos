@@ -28,7 +28,7 @@ class DashboardController extends Controller
         $salesChartLabels = [];
         for ($i = 6; $i >= 0; $i--) {
             $date = Carbon::today()->subDays($i);
-            $salesChartLabels[] = $date->locale('id')->isoFormat('dddd');
+            $salesChartLabels[] = $date->locale('id')->translatedFormat('l');
             $salesChartData[] = Transaction::whereDate('created_at', $date)->sum('total_amount');
         }
         $categoryChartDataRaw = TransactionDetail::select('products.category', DB::raw('SUM(transaction_details.quantity) as total_qty'))

@@ -176,8 +176,8 @@
             <button @click="selectedCategory = 'Baju'" :class="selectedCategory === 'Baju' ? 'bg-surface-container-lowest border-2 border-primary-container text-on-surface ambient-shadow-1' : 'bg-surface border border-outline-variant text-on-surface-variant hover:bg-surface-container-high'" class="px-4 py-1.5 rounded-full text-label-md font-label-md whitespace-nowrap transition-colors">
               Baju
             </button>
-            <button @click="selectedCategory = 'Tas'" :class="selectedCategory === 'Tas' ? 'bg-surface-container-lowest border-2 border-primary-container text-on-surface ambient-shadow-1' : 'bg-surface border border-outline-variant text-on-surface-variant hover:bg-surface-container-high'" class="px-4 py-1.5 rounded-full text-label-md font-label-md whitespace-nowrap transition-colors">
-              Tas
+            <button @click="selectedCategory = 'Celana'" :class="selectedCategory === 'Celana' ? 'bg-surface-container-lowest border-2 border-primary-container text-on-surface ambient-shadow-1' : 'bg-surface border border-outline-variant text-on-surface-variant hover:bg-surface-container-high'" class="px-4 py-1.5 rounded-full text-label-md font-label-md whitespace-nowrap transition-colors">
+              Celana
             </button>
             <button @click="selectedCategory = 'Aksesoris'" :class="selectedCategory === 'Aksesoris' ? 'bg-surface-container-lowest border-2 border-primary-container text-on-surface ambient-shadow-1' : 'bg-surface border border-outline-variant text-on-surface-variant hover:bg-surface-container-high'" class="px-4 py-1.5 rounded-full text-label-md font-label-md whitespace-nowrap transition-colors">
               Aksesoris
