@@ -271,7 +271,7 @@
           </div>
           <div class="flex justify-between text-body-sm font-body-sm text-on-surface-variant items-center">
             <span>Diskon (Rp)</span>
-            <input type="number" x-model.number="discount" class="border border-outline-variant rounded-md w-24 text-right p-1 text-sm bg-surface">
+            <input type="number" min="0" x-model.number="discount" class="border border-outline-variant rounded-md w-24 text-right p-1 text-sm bg-surface">
           </div>
           <div class="flex justify-between text-headline-sm font-headline-sm text-on-surface pt-2 border-t border-outline-variant border-dashed">
             <span>Total Bayar</span>
@@ -374,7 +374,10 @@
                     </div>
                     <div class="flex justify-between items-center mt-2 border-t border-outline-variant pt-2">
                         <span class="text-on-surface-variant font-medium">Kembalian:</span>
-                        <span class="text-lg font-bold" :class="changeAmount < 0 ? 'text-error' : 'text-primary'" x-text="formatRupiah(changeAmount)"></span>
+                        <div class="text-right">
+                            <span class="text-lg font-bold" :class="changeAmount < 0 ? 'text-error' : 'text-primary'" x-text="changeAmount < 0 ? 'Rp 0' : formatRupiah(changeAmount)"></span>
+                            <p x-show="changeAmount < 0 && cashReceived > 0" class="text-xs text-error mt-1 font-medium">Uang tidak cukup</p>
+                        </div>
                     </div>
                 </div>
             </template>
@@ -402,7 +405,7 @@
             </template>
         </div>
 
-        <button @click="checkout" :class="isPaymentValid ? 'bg-[#10B981] hover:bg-emerald-600' : 'bg-surface-container-high text-on-surface-variant'" class="w-full py-3 rounded-lg text-label-lg font-bold transition-colors shadow-md flex justify-center items-center gap-2">
+        <button @click="checkout" :disabled="!isPaymentValid" :class="isPaymentValid ? 'bg-[#10B981] hover:bg-emerald-600' : 'bg-surface-container-high text-on-surface-variant cursor-not-allowed'" class="w-full py-3 rounded-lg text-label-lg font-bold transition-colors shadow-md flex justify-center items-center gap-2">
             <span class="material-symbols-outlined text-[20px]" x-show="isPaymentValid">check_circle</span>
             Selesaikan Transaksi
         </button>
@@ -430,7 +433,8 @@
           </div>
           <div class="w-full text-mono-label font-mono-label text-on-surface-variant text-left space-y-1">
             <p>No. Transaksi: <span x-text="transactionId"></span></p>
-            <p>Tanggal: <span x-text="new Date().toLocaleString('id-ID')"></span></p>
+            <p>Tanggal: <span x-text="transactionDate"></span></p>
+            <p>Metode Pembayaran: <span x-text="receiptPaymentMethod ? receiptPaymentMethod.toUpperCase() : ''"></span></p>
           </div>
         </div>
 
@@ -517,10 +521,18 @@
                 // Receipt State
                 showReceipt: false,
                 transactionId: '',
+                transactionDate: '',
+                receiptPaymentMethod: '',
                 receiptCart: [],
                 receiptSubtotal: 0,
                 receiptDiscount: 0,
                 receiptTotal: 0,
+
+                init() {
+                    this.$watch('discount', value => {
+                        if (value < 0) this.discount = 0;
+                    });
+                },
 
                 get filteredProducts() {
                     let result = this.products;
@@ -668,7 +680,9 @@
                     .then(data => {
                         if(data.success) {
                             // Populate receipt modal data
-                            this.transactionId = 'INV-' + data.transaction_id;
+                            this.transactionId = data.invoice_code;
+                            this.transactionDate = data.transaction_date;
+                            this.receiptPaymentMethod = data.payment_method;
                             this.receiptCart = [...this.cart];
                             this.receiptSubtotal = this.subtotal;
                             this.receiptDiscount = this.discount;

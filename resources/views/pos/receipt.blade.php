@@ -19,8 +19,8 @@
 
     <div class="border-bottom">
         <p>No: {{ $transaction->invoice_code }}</p>
-        <p>Tgl: {{ $transaction->created_at->format('d M Y H:i') }}</p>
-        <p>Metode: {{ strtoupper($transaction->payment_method) }}</p>
+        <p>Tgl: {{ $transaction->created_at->format('d M Y H:i') }} WIB</p>
+        <p>Metode: {{ strtoupper($transaction->payment_method ?? 'TUNAI') }}</p>
     </div>
 
     <table class="border-bottom">

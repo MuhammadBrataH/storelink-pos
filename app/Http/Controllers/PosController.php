@@ -64,6 +64,8 @@ class PosController extends Controller
                 'success' => true,
                 'transaction_id' => $transaction->id,
                 'invoice_code' => $transaction->invoice_code,
+                'payment_method' => $transaction->payment_method,
+                'transaction_date' => $transaction->created_at->format('d M Y H:i') . ' WIB',
                 'message' => 'Transaksi Berhasil'
             ]);
         } catch (\Exception $e) {
