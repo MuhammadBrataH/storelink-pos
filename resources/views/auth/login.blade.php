@@ -123,7 +123,7 @@
 <div class="absolute top-[-10%] left-[-10%] w-[80vw] h-[80vw] md:w-[40vw] md:h-[40vw] bg-primary-fixed/40 rounded-full blur-[100px] md:blur-[120px] pointer-events-none mix-blend-multiply"></div>
 <div class="absolute bottom-[-10%] right-[-5%] w-[70vw] h-[70vw] md:w-[35vw] md:h-[35vw] bg-secondary-fixed/30 rounded-full blur-[80px] md:blur-[100px] pointer-events-none mix-blend-multiply"></div>
 <!-- Login Card Container -->
-<main class="w-full max-w-[440px] bg-surface-container-lowest/70 backdrop-blur-xl rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.08)] border border-white/40 relative z-10 overflow-hidden animate-fade-in-up">
+<main class="w-full max-w-[440px] bg-white/40 backdrop-blur-lg rounded-3xl shadow-2xl border border-white/50 relative z-10 overflow-hidden animate-fade-in-up">
 <!-- Header Top Accent -->
 <div class="h-1.5 w-full bg-gradient-to-r from-primary to-primary-container"></div>
 <div class="p-8 md:p-12">
@@ -140,7 +140,7 @@
 </div>
 
 @if ($errors->any())
-<div class="mb-6 rounded-xl border border-error/20 bg-error-container p-4 text-sm text-on-error-container flex items-center gap-3">
+<div class="mb-6 rounded-2xl border border-error/20 bg-error-container/80 backdrop-blur-sm p-4 text-sm text-on-error-container flex items-center gap-3">
     <span class="material-symbols-outlined text-[20px]">error</span>
     <p class="font-medium">{{ $errors->first() }}</p>
 </div>
@@ -156,7 +156,7 @@
 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
 <span class="material-symbols-outlined text-outline group-focus-within:text-primary transition-colors duration-300 text-[20px]">person</span>
 </div>
-<input class="block w-full pl-12 pr-4 py-3.5 bg-surface-bright/50 border border-outline-variant/60 rounded-xl text-on-surface font-body-md text-body-md placeholder:text-outline focus:bg-surface-bright focus:ring-2 focus:ring-primary-container/30 focus:border-primary transition-all duration-300 outline-none shadow-sm" id="username" name="username" placeholder="username" required="" type="text" value="{{ old('username') }}"/>
+<input class="block w-full pl-12 pr-4 py-3.5 bg-white/50 border border-outline-variant/60 rounded-2xl text-on-surface font-body-md text-body-md placeholder:text-outline focus:bg-white/70 focus:ring-2 focus:ring-primary-container/30 focus:border-primary transition-all duration-300 outline-none shadow-sm" id="username" name="username" placeholder="username" required="" type="text" value="{{ old('username') }}"/>
 </div>
 </div>
 <!-- Password Input -->
@@ -166,7 +166,7 @@
 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
 <span class="material-symbols-outlined text-outline group-focus-within:text-primary transition-colors duration-300 text-[20px]">lock</span>
 </div>
-<input class="block w-full pl-12 pr-12 py-3.5 bg-surface-bright/50 border border-outline-variant/60 rounded-xl text-on-surface font-body-md text-body-md placeholder:text-outline focus:bg-surface-bright focus:ring-2 focus:ring-primary-container/30 focus:border-primary transition-all duration-300 outline-none shadow-sm" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+<input class="block w-full pl-12 pr-12 py-3.5 bg-white/50 border border-outline-variant/60 rounded-2xl text-on-surface font-body-md text-body-md placeholder:text-outline focus:bg-white/70 focus:ring-2 focus:ring-primary-container/30 focus:border-primary transition-all duration-300 outline-none shadow-sm" id="password" name="password" placeholder="••••••••" required="" type="password"/>
 <button class="absolute inset-y-0 right-0 pr-4 flex items-center text-outline hover:text-on-surface transition-colors focus:outline-none" id="togglePassword" type="button">
 <span class="material-symbols-outlined text-[20px]" id="visibilityIcon">visibility_off</span>
 </button>
@@ -184,7 +184,7 @@
 
 <!-- Submit Button -->
 <div class="pt-6">
-<button class="w-full flex justify-center items-center py-3.5 px-4 rounded-xl shadow-[0_4px_12px_rgba(37,99,235,0.25)] font-label-lg text-label-lg text-on-primary-container bg-gradient-to-r from-primary to-primary-container hover:shadow-[0_6px_16px_rgba(37,99,235,0.35)] hover:-translate-y-0.5 transition-all duration-300 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" type="submit">
+<button class="w-full flex justify-center items-center py-3.5 px-4 rounded-2xl shadow-[0_4px_12px_rgba(37,99,235,0.25)] font-label-lg text-label-lg text-on-primary-container bg-gradient-to-r from-primary to-primary-container hover:shadow-[0_6px_16px_rgba(37,99,235,0.35)] hover:-translate-y-0.5 transition-all duration-300 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" type="submit">
                         Masuk
                         <span class="material-symbols-outlined ml-2 text-[20px]">arrow_forward</span>
 </button>
@@ -192,10 +192,10 @@
 </form>
 </div>
 <!-- Bottom Decorative Footer -->
-<div class="bg-surface-bright/40 py-6 border-t border-white/20 text-center backdrop-blur-md flex flex-col items-center justify-center gap-3">
+<div class="bg-white/20 py-6 border-t border-white/20 text-center backdrop-blur-md flex flex-col items-center justify-center gap-3">
     <p class="font-label-md text-label-md text-outline">Storelink POS System v1.0.0</p>
     <div class="flex flex-col items-center justify-center w-full text-center">
-        <span class="text-[11px] text-gray-500 font-semibold mb-2 tracking-widest uppercase bg-gray-50/80 px-3 py-1 rounded-full border border-gray-200/50 backdrop-blur-sm inline-block">Powered by</span>
+        <span class="text-[11px] text-gray-500 font-semibold mb-2 tracking-widest uppercase bg-white/50 px-3 py-1 rounded-full border border-white/50 backdrop-blur-sm inline-block">Powered by</span>
         <img src="{{ asset('image/logo_text.png') }}" alt="Nubra Solutions" class="w-36 object-contain hover:scale-105 transition-transform duration-300 drop-shadow-sm mx-auto" />
     </div>
 </div>
