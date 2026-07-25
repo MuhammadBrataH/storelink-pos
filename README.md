@@ -36,9 +36,8 @@ Sistem ini dikembangkan menggunakan teknologi modern berskala industri (*industr
 
 ## 📐 System Architecture
 
-> *Placeholder: Area ini disiapkan untuk diagram arsitektur sistem (seperti Entity Relationship Diagram atau C4 Model) di masa mendatang.*
-> 
-> `![System Architecture](...)`
+<img width="1167" height="889" alt="ERD" src="https://github.com/user-attachments/assets/e3165fb0-9a90-4eb9-9d23-6c21af83eadb" />
+
 
 ## 📌 Prerequisites
 
