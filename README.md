@@ -9,7 +9,12 @@
 
 Aplikasi Storelink POS dibangun dengan arsitektur MVC menggunakan Laravel, berfokus pada performa, keamanan, dan *developer experience* (DX) yang tinggi. Kami merancang sistem ini untuk memecahkan masalah pencatatan transaksi manual yang rentan error melalui antarmuka (UI/UX) yang intuitif.
 
-![Screenshot](https://via.placeholder.com/1000x500.png?text=✨+Taruh+Screenshot/GIF+Demo+Aplikasi+Storelink+POS+Di+Sini+✨)
+<img width="959" height="514" alt="Screenshot 2026-06-14 131231" src="https://github.com/user-attachments/assets/45959fb4-b6db-4295-9b4e-e1d4c539a537" />
+
+<img width="959" height="513" alt="Screenshot 2026-06-14 131503" src="https://github.com/user-attachments/assets/3d9dfbee-b8c8-44cf-b68e-adb24bd83f1c" />
+
+<img width="959" height="514" alt="Screenshot 2026-06-14 131314" src="https://github.com/user-attachments/assets/e6fcf0d7-0b58-4150-adeb-0009037b0901" />
+
 
 ---
 
