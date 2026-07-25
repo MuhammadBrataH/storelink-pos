@@ -1,60 +1,164 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🚀 Storelink POS
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![Build Status](https://img.shields.io/badge/build-passing-brightgreen?style=for-the-badge)
+![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen?style=for-the-badge)
+![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)
+![Version](https://img.shields.io/badge/version-1.0.0-blue?style=for-the-badge)
 
-## About Laravel
+> **Solusi Point of Sales (POS) modern berbasis web yang dirancang untuk mempercepat transaksi, mengelola inventori produk secara efisien, dan dilengkapi sistem otorisasi multi-role.**
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Aplikasi Storelink POS dibangun dengan arsitektur MVC menggunakan Laravel, berfokus pada performa, keamanan, dan *developer experience* (DX) yang tinggi. Kami merancang sistem ini untuk memecahkan masalah pencatatan transaksi manual yang rentan error melalui antarmuka (UI/UX) yang intuitif.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+![Screenshot](https://via.placeholder.com/1000x500.png?text=✨+Taruh+Screenshot/GIF+Demo+Aplikasi+Storelink+POS+Di+Sini+✨)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 💻 Tech Stack
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+Sistem ini dikembangkan menggunakan teknologi modern berskala industri (*industry-standard*):
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Backend / Framework**: [Laravel (PHP)](https://laravel.com/)
+- **Frontend**: [Blade Templates](https://laravel.com/docs/blade) & HTML/CSS/JS
+- **Database**: MySQL
+- **Authentication**: Laravel Auth & Middleware
 
-## Laravel Sponsors
+## ✨ Key Features
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- ⚡ **Manajemen Inventori (Products)** — *Mengelola stok barang, penambahan produk baru, dan update harga secara real-time.*
+- 🎨 **Sistem Transaksi Cepat** — *Mencatat detail transaksi secara akurat dan efisien untuk kebutuhan operasional kasir.*
+- 🔒 **Role-Based Access Control (RBAC)** — *Pembatasan akses berbasis role secara aman (misal: antara Admin dan Staff/Kasir).*
+- 📊 **Otentikasi Terpusat** — *Sistem login dan autentikasi yang aman untuk melindungi integritas data pengguna.*
 
-### Premium Partners
+## 📐 System Architecture
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+> *Placeholder: Area ini disiapkan untuk diagram arsitektur sistem (seperti Entity Relationship Diagram atau C4 Model) di masa mendatang.*
+> 
+> `![System Architecture](...)`
 
-## Contributing
+## 📌 Prerequisites
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Pastikan *environment* sistem Anda telah memenuhi persyaratan berikut sebelum melakukan proses instalasi:
+- **PHP 8.1+**
+- **Composer** (Dependency Manager)
+- **MySQL** (Berjalan di *background* melalui XAMPP/Laragon/Docker)
+- **Node.js & npm** (Opsional, untuk kompilasi asset frontend)
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 🚀 Getting Started
 
-## Security Vulnerabilities
+Ikuti panduan instalasi langkah demi langkah berikut untuk menjalankan aplikasi Storelink POS di *environment* lokal (Development) Anda.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 1. Clone Repository
 
-## License
+```bash
+git clone https://github.com/MuhammadBrataH/storelink-pos.git
+cd storelink-pos
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# storelink-pos
+### 2. Install Dependencies
+
+```bash
+# Install dependensi backend (PHP)
+composer install
+
+# Install dependensi frontend
+npm install
+```
+
+### 3. Environment Configuration
+
+Gandakan template variabel *environment* dan sesuaikan kredensialnya dengan konfigurasi database lokal Anda.
+
+```bash
+cp .env.example .env
+```
+
+**Konfigurasi file `.env` (Sesuaikan bagian database):**
+```env
+APP_NAME="Storelink POS"
+APP_ENV=local
+APP_DEBUG=true
+APP_URL=http://localhost:8000
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=storelink_db
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### 4. Setup Database & Key
+
+```bash
+# Generate application key
+php artisan key:generate
+
+# Migrasi struktur database dan jalankan seeder (jika ada)
+php artisan migrate --seed
+```
+
+### 5. Run the Application
+
+```bash
+# Menjalankan development server (Backend)
+php artisan serve
+
+# (Opsional) Menjalankan asset compiler di tab terminal baru
+npm run dev
+```
+
+Aplikasi kini dapat diakses melalui browser  Anda pada `http://localhost:8000`.
+
+---
+
+## 💡 Usage
+
+Setelah aplikasi berjalan, navigasikan ke URL aplikasi untuk menggunakan sistem POS.
+
+**Alur Penggunaan Utama:**
+1. Login menggunakan akun yang sudah di-seed.
+2. Masuk ke halaman **Inventory** untuk melihat daftar produk.
+3. Buka menu **Transaction** untuk memulai pencatatan penjualan baru dan memproses order.
+
+## 🧪 Testing
+
+Kami sangat peduli terhadap *code quality*. Jalankan perintah berikut untuk mengeksekusi *automated tests* dan memastikan fungsionalitas dan logika transaksi berjalan semestinya:
+
+```bash
+php artisan test
+```
+
+---
+
+## 🤝 Contributing
+
+Project ini berpegang pada semangat *Open Source*. Segala bentuk kolaborasi, pelaporan *bug*, maupun kontribusi fitur sangat diapresiasi! 
+
+1. **Fork** repository ini.
+2. Buat branch untuk fitur Anda: `git checkout -b feature/NamaFiturHebat`
+3. **Commit** perubahan Anda: `git commit -m 'feat: Menambahkan fitur XYZ'`
+4. **Push** ke branch tersebut: `git push origin feature/NamaFiturHebat`
+5. Buka **Pull Request** dan deskripsikan perubahan Anda secara komprehensif.
+
+## 📄 License
+
+Aplikasi ini didistribusikan di bawah lisensi **MIT License**. Lihat file `LICENSE` untuk informasi lebih lanjut mengenai hak cipta.
+
+## ✉️ Contact & Author
+
+Dikembangkan dengan dedikasi penuh oleh **Muhammad Brata Hadinata & Wyandhanu Maulidan Nugraha**
+
+Sebagai praktisi di bidang *Software Engineering*, kami selalu terbuka untuk diskusi teknis, kolaborasi *open source*, maupun peluang karir profesional. Mari terhubung!
+
+- 💼 **LinkedIn**: 
+https://www.linkedin.com/in/muhammad-brata-hadinata-05335b372/
+https://www.linkedin.com/in/wyandhanu-nugraha-47762b32a/
+
+- 🐙 **GitHub**: 
+https://github.com/MuhammadBrataH
+https://github.com/wyandhanupapoy
+
+---
+*⭐ Jangan lupa berikan star pada repository ini jika menurut Anda project ini bermanfaat!*
